@@ -1,8 +1,9 @@
 ## Loggbok
 
 **Driftsättning:**
-Applikation är deployad till eget webbhotell via FTP (FileZilla)
-Live-sida: https://hampus.tech
+
+- Applikation är deployad till eget webbhotell via FTP (FileZilla)
+- Live-sida: https://hampus.tech
 
 _I prod används statisk JSON-fil med try/catch-fallback pga hosting-begränsning_
 
