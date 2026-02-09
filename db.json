@@ -1,20 +1,20 @@
 {
     "movies":[
         {
-            "Title": "Fast and Furious 6", 
-            "Price": 100
+            "title": "Fast and Furious 6", 
+            "price": 100
         },
         {
-            "Title": "The Mummy Returns", 
-            "Price": 50
+            "title": "The Mummy Returns", 
+            "price": 50
         },
             {
-            "Title": "Jumanji: Welcome to the jungle", 
-            "Price": 70
+            "title": "Jumanji: Welcome to the jungle", 
+            "price": 70
         },
             {
-            "Title": "Rampage", 
-            "Price": 40
+            "title": "Rampage", 
+            "price": 40
         }
     ]
 }

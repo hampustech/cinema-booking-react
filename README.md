@@ -22,3 +22,5 @@
 **Dag 5**
 - Städade projektstruktur  
 - Förberedde för GitHub Pages
+
+I prod används statisk JSON-fil med try/catch-fallback pga hosting-begränsning

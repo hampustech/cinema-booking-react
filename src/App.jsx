@@ -8,7 +8,7 @@ import Summary from "./components/Summary";
 
 function App() {
   const [movies, setMovies] = useState([]);
-  const [selectedPrice, setSelectedPrice] = useState(0);
+  const [selectedPrice, setSelectedPrice] = useState("");
   const [selectedSeats, setSelectedSeats] = useState([]);
   const occupiedSeats = [10, 11, 22, 23, 34, 35, 44, 45, 46];
 
@@ -30,23 +30,49 @@ function App() {
   }
 
   const selectedCount = selectedSeats.length;
-  const totalPrice = selectedCount * selectedPrice;
+  const totalPrice = 
+    selectedPrice == null
+      ? 0
+      : selectedCount * selectedPrice;
 
   useEffect(() => {
     async function getMovies() {
+      try {
       const response = await fetch("http://localhost:3001/movies");
+
+      if (!response.ok) {
+        throw new Error("JSON-server svarade inte");
+      }
+
       const moviesFromServer = await response.json();
 
       const movieObjects = moviesFromServer.map(
-        m => new Movie(m.Title, m.Price)
+        m => new Movie(m.title, m.price)
       );
 
       setMovies(movieObjects);
 
-      if (movieObjects.length > 0) {
-        setSelectedPrice(Number(movieObjects[0].price));
-      }
+      // if (movieObjects.length > 0) {
+      //   setSelectedPrice(Number(movieObjects[0].price));
+      // }
     }
+    catch (err) {
+      console.warn("Faller tillbaka till lokal JSON-fil:", err);
+
+      const fallbackResponse = await fetch("/movies.json");
+      const moviesFromFile = await fallbackResponse.json();
+
+      const movieObjects = moviesFromFile.map(
+        m => new Movie(m.title, m.price)
+      );
+      
+      setMovies(movieObjects);
+
+      // if (movieObjects.Length > 0) {
+      //   setSelectedPrice(number(movieObjects[0].price));
+      // }
+    }
+  }
 
     getMovies();
   }, []);
