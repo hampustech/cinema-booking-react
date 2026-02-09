@@ -10,8 +10,8 @@ export default function MovieSelect({ movies, selectedPrice, onPriceChange}) {
         >
           {Array.isArray(movies) && 
             movies.map((movie, index) => (
-              <option key={index} value={movie.Price}>
-                {movie.Title} ({movie.Price} kr)
+              <option key={index} value={movie.price}>
+                {movie.title} (${movie.price})
               </option>
             ))}
         </select>

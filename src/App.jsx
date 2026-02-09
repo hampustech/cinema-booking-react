@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import './App.css'
+import Movie from "./models/movie";
 import MovieSelect from "./components/MovieSelect";
 import SeatRows from "./components/SeatRows";
 import Summary from "./components/Summary";
@@ -36,12 +37,14 @@ function App() {
       const response = await fetch("http://localhost:3001/movies");
       const moviesFromServer = await response.json();
 
-      console.log("Filmer från server:", moviesFromServer);
+      const movieObjects = moviesFromServer.map(
+        m => new Movie(m.Title, m.Price)
+      );
 
-      setMovies(moviesFromServer);
+      setMovies(movieObject);
 
       if (moviesFromServer.length > 0) {
-        setSelectedPrice(Number(moviesFromServer[0].Price));
+        setSelectedPrice(Number(moviesFromServer[0].price));
       }
     }
 
@@ -74,13 +77,13 @@ function App() {
 
       <div className="container">
         <div className="screen"></div>
-      </div>
 
       <SeatRows
         occupiedSeats={occupiedSeats}
         selectedSeats={selectedSeats}
         toggleSeat={toggleSeat}
       />
+      </div>
 
 
       <Summary selectedCount={selectedCount} totalPrice={totalPrice} />
