@@ -3,8 +3,25 @@ import { useEffect } from "react";
 import './App.css'
 
 function App() {
-  const [movies, setMovies] = useState({});
+  const [movies, setMovies] = useState([]);
   const [selectedPrice, setSelectedPrice] = useState(0);
+  const [selectedSeats, SetSelectedSeats] = useState([]);
+
+  function toggleSeat(index) {
+    const seatElement = document.getElementById(`seat-${index}`);
+    if (seatElement?.classList.contains("occupied")) {
+      return;
+    }
+
+    if (selectedSeats.includes(index)) {
+      SetSelectedSeats(
+        selectedSeats.filter(s => s !== index)
+      );
+    }
+    else {
+      SetSelectedSeats([...selectedSeats, index]);
+    }
+  }
 
 
   useEffect(() => {
