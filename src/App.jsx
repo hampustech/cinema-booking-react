@@ -41,10 +41,10 @@ function App() {
         m => new Movie(m.Title, m.Price)
       );
 
-      setMovies(movieObject);
+      setMovies(movieObjects);
 
-      if (moviesFromServer.length > 0) {
-        setSelectedPrice(Number(moviesFromServer[0].price));
+      if (movieObjects.length > 0) {
+        setSelectedPrice(Number(movieObjects[0].price));
       }
     }
 
