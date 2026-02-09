@@ -8,11 +8,19 @@
   border-radius: 5px;
   font-size: 14px;
   font-family: inherit;
+  width: 300px;
+  min-width: 300px;
+  text-align: center;
+  text-align-last: center;
   margin-left: 10px;
   padding: 5px 15px;
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
+}
+
+.movie-container select option:first-child {
+  text-align: center;
 }
 
 .container {

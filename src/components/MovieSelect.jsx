@@ -8,12 +8,10 @@ export default function MovieSelect({ movies, selectedPrice, onPriceChange}) {
         value={selectedPrice}
         onChange={(e) => onPriceChange(Number(e.target.value))}
         >
-          <option value= "" disabled>
+          <option value= "" disabled hidden>
             — Pick a movie —
           </option>
 
-
-          {/* {Array.isArray(movies) &&  */}
             {movies.map((movie, index) => (
               <option key={index} value={movie.price}>
                 {movie.title} (${movie.price})

@@ -51,10 +51,6 @@ function App() {
       );
 
       setMovies(movieObjects);
-
-      // if (movieObjects.length > 0) {
-      //   setSelectedPrice(Number(movieObjects[0].price));
-      // }
     }
     catch (err) {
       console.warn("Faller tillbaka till lokal JSON-fil:", err);
@@ -67,10 +63,6 @@ function App() {
       );
       
       setMovies(movieObjects);
-
-      // if (movieObjects.Length > 0) {
-      //   setSelectedPrice(number(movieObjects[0].price));
-      // }
     }
   }
 
