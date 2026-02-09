@@ -1,28 +1,35 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import './App.css'
+import MovieSelect from "./components/MovieSelect";
+import SeatRows from "./components/SeatRows";
+import Summary from "./components/Summary";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [selectedPrice, setSelectedPrice] = useState(0);
-  const [selectedSeats, SetSelectedSeats] = useState([]);
+  const [selectedSeats, setSelectedSeats] = useState([]);
+  const occupiedSeats = [10, 11, 22, 23, 34, 35, 44, 45, 46];
 
   function toggleSeat(index) {
-    const seatElement = document.getElementById(`seat-${index}`);
-    if (seatElement?.classList.contains("occupied")) {
+
+    if (occupiedSeats.includes(index)) {
       return;
     }
 
     if (selectedSeats.includes(index)) {
-      SetSelectedSeats(
-        selectedSeats.filter(s => s !== index)
+      setSelectedSeats(
+        selectedSeats.filter(seat => seat !== index)
       );
     }
+
     else {
-      SetSelectedSeats([...selectedSeats, index]);
+      setSelectedSeats([...selectedSeats, index]);
     }
   }
 
+  const selectedCount = selectedSeats.length;
+  const totalPrice = selectedCount * selectedPrice;
 
   useEffect(() => {
     async function getMovies() {
@@ -43,22 +50,12 @@ function App() {
 
   return (
     <>
-      <div className="movie-container">
-        <label htmlFor="movie">Pick a movie:</label>
-
-        <select 
-        id="movie"
-        value={selectedPrice}
-        onChange={(e) => setSelectedPrice(Number(e.target.value))}
-        >
-          {Array.isArray(movies) && 
-            movies.map((movie, index) => (
-              <option key={index} value={movie.Price}>
-                {movie.Title} ({movie.Price} kr)
-              </option>
-            ))}
-        </select>
-      </div>
+      
+      <MovieSelect
+        movies={movies}
+        selectedPrice={selectedPrice}
+        onPriceChange={setSelectedPrice}
+      />
 
       <ul className="showcase">
         <li>
@@ -74,75 +71,20 @@ function App() {
           <small>Occupied</small>
         </li>
       </ul>
+
       <div className="container">
         <div className="screen"></div>
-        <div className="row">
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-        </div>
-        <div className="row">
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat occupied"></div>
-          <div className="seat occupied"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-        </div>
-        <div className="row">
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat occupied"></div>
-          <div className="seat occupied"></div>
-        </div>
-        <div className="row">
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-        </div>
-        <div className="row">
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat occupied"></div>
-          <div className="seat occupied"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-        </div>
-        <div className="row">
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat"></div>
-          <div className="seat occupied"></div>
-          <div className="seat occupied"></div>
-          <div className="seat occupied"></div>
-          <div className="seat"></div>
-        </div>
       </div>
-      <p className="text">
-        You have selected <span id="count">0</span> seats for a price of $<span
-          id="total"
-          >0</span
-        >
-      </p>
+
+      <SeatRows
+        occupiedSeats={occupiedSeats}
+        selectedSeats={selectedSeats}
+        toggleSeat={toggleSeat}
+      />
+
+
+      <Summary selectedCount={selectedCount} totalPrice={totalPrice} />
+
     </>
   );
 }
