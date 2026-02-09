@@ -6,7 +6,7 @@ export default function MovieSelect({ movies, selectedPrice, onPriceChange}) {
         <select 
         id="movie"
         value={selectedPrice}
-        onChange={(e) => setSelectedPrice(Number(e.target.value))}
+        onChange={(e) => onPriceChange(Number(e.target.value))}
         >
           {Array.isArray(movies) && 
             movies.map((movie, index) => (
