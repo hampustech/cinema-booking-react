@@ -1,21 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #242333;
-  color: #fff;
-  font-family: "Poppins", sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  margin: 0;
-}
-
 .movie-container {
   margin: 20px 0;
 }
@@ -36,6 +18,11 @@ body {
 .container {
   perspective: 1000px;
   margin-bottom: 30px;
+
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .seat {
@@ -96,6 +83,7 @@ body {
 
 .row {
   display: flex;
+  justify-content: center;
 }
 
 .screen {
